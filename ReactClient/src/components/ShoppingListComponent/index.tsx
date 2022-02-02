@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Header } from 'semantic-ui-react';
-import AddItemForm from "../ReadyMadeChoicesComponent";
-import ShoppingItem from "../ShoppingItemComponent";
-import UserItemForm from "../UserItemComponent";
-import { useState } from "react";
+import ReadyMadeChoicesComponent from "../ReadyMadeChoicesComponent";
+import ShoppingItemComponent from "../ShoppingItemComponent";
+import UserItemComponent from "../UserItemComponent";
 import ShopProduct from "../../ShoppingData/ShopProduct";
 import BasketItem from "../../ShoppingData/BasketItem";
 
@@ -21,9 +20,11 @@ const ShoppingListComponent = () => {
             setBasketItems(newBasketItems);
             setCount(newBasketItems.length);
         } else {
-            basketItem.count = basketItem.count.valueOf() + 1;
-            const newBasketItems: Array<BasketItem> = [...basketItems];
-            setBasketItems(newBasketItems);
+            if (basketItem.limit == null || basketItem.count < basketItem.limit) {
+                basketItem.count = basketItem.count.valueOf() + 1;
+                const newBasketItems: Array<BasketItem> = [...basketItems];
+                setBasketItems(newBasketItems);
+            }
         }
     };
 
@@ -35,19 +36,33 @@ const ShoppingListComponent = () => {
 
     return ( 
         <Container>
-            <Header>
-                Shopping List
-            </Header>
-            <UserItemForm addToShoppingItem={addToShoppingItem} />
-            <AddItemForm addToShoppingItem={addToShoppingItem} />
-            <h1>{counter} {counter === 1 ? "item" : "items"}</h1>
-            <div className="shoppingList-list">
-                {basketItems.map((shoppingItem, index) => (
-                    <ShoppingItem
-                        shoppingItem={shoppingItem}
-                        removeFromShoppingItem={removeFromShoppingItem}
-                    />
-                ))}
+            <div className="ui celled grid">
+                <div className="row">
+                    <div className="four wide column">
+                        <Header>
+                            <h1>Shopping List</h1>
+                        </Header>
+                        <p>
+                            <UserItemComponent addToShoppingItem={addToShoppingItem} />
+                        </p>
+                        <p>
+                            <ReadyMadeChoicesComponent addToShoppingItem={addToShoppingItem} />
+                        </p>
+                    </div>
+                    <div className="twelve wide column">
+                        <Header>
+                            <h1>{counter} {counter === 1 ? "item" : "items"}</h1>
+                        </Header>
+                        <p>
+                            {basketItems.map((basketItem, index) => (
+                                <ShoppingItemComponent
+                                    basketItem={basketItem}
+                                    removeFromShoppingItem={removeFromShoppingItem}
+                                />
+                            ))}
+                        </p>
+                    </div>
+                </div>
             </div>
         </Container>
     );  

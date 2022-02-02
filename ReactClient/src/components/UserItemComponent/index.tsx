@@ -22,7 +22,7 @@ const UserItemComponent = ({ addToShoppingItem }) => {
             <div 
             className="ui left action input">
                 <button 
-                className="ui teal icon button" 
+                className="ui primary icon button" 
                 type="button" 
                 value="button"    
                 onClick={() => handleSubmit()}
