@@ -1,5 +1,5 @@
 import React from "react";
-import BasketItem from "../../ShoppingData/BasketItem";
+import BasketItem from "@/shared/BasketItem";
 
 const UserItemComponent = ({ addToShoppingItem }) => {
     const [value, setValue] = React.useState("");

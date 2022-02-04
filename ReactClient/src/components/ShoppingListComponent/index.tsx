@@ -3,8 +3,9 @@ import { Container, Header } from 'semantic-ui-react';
 import ReadyMadeChoicesComponent from "../ReadyMadeChoicesComponent";
 import ShoppingItemComponent from "../ShoppingItemComponent";
 import UserItemComponent from "../UserItemComponent";
-import ShopProduct from "../../ShoppingData/ShopProduct";
-import BasketItem from "../../ShoppingData/BasketItem";
+import ShopProduct from "@/shared/ShopProduct";
+import BasketItem from "@/shared/BasketItem";
+import { postBasketItemsToServer } from "../../services/shopping";
 
 const ShoppingListComponent = () => {
     const initialBasketItems: Array<BasketItem> = [];
@@ -34,6 +35,15 @@ const ShoppingListComponent = () => {
         setCount(newShoppingList.length);
     };
 
+    const checkout = () => {
+        // Send basketItems to API
+        let userId = "1234";
+        postBasketItemsToServer(userId, basketItems)
+            .then(data => {
+                const dummy = 0;
+            });
+    };
+
     return ( 
         <Container>
             <div className="ui celled grid">
@@ -42,25 +52,42 @@ const ShoppingListComponent = () => {
                         <Header>
                             <h1>Shopping List</h1>
                         </Header>
-                        <p>
+                        <div className="ui divider"></div>
+                        <div>
                             <UserItemComponent addToShoppingItem={addToShoppingItem} />
-                        </p>
-                        <p>
-                            <ReadyMadeChoicesComponent addToShoppingItem={addToShoppingItem} />
-                        </p>
+                        </div>
+                        <div className="ui hidden divider"></div>
+                        <div>
+                            <ReadyMadeChoicesComponent 
+                                addToShoppingItem={addToShoppingItem} />
+                        </div>
                     </div>
                     <div className="twelve wide column">
                         <Header>
-                            <h1>{counter} {counter === 1 ? "item" : "items"}</h1>
+                            <h1>{counter} {counter === 1 ? "item" : "items"} in basket
+                                <button 
+                                className="ui primary right floated basic labeled icon button" 
+                                type="button" 
+                                value="button">
+                                    <i className="shopping cart icon" onClick={() => checkout()}></i>
+                                    Checkout
+                                </button>
+                            </h1>
                         </Header>
-                        <p>
-                            {basketItems.map((basketItem, index) => (
-                                <ShoppingItemComponent
-                                    basketItem={basketItem}
-                                    removeFromShoppingItem={removeFromShoppingItem}
-                                />
-                            ))}
-                        </p>
+                        <div className="ui divider"></div>
+                        <div>
+                            <div className="ui list">
+                                {basketItems.map((basketItem, index) => (
+                                    <div className="item"> 
+                                        <ShoppingItemComponent
+                                            key={basketItem.uniqueCode}
+                                            basketItem={basketItem}
+                                            removeFromShoppingItem={removeFromShoppingItem}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

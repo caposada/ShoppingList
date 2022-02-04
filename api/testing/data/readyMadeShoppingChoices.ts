@@ -1,6 +1,6 @@
-import ShopProduct from "./ShopProduct";
+import ShopProduct from "@/shared/ShopProduct";
 
-const ReadyMadeShoppingItem: Array<ShopProduct> = [
+const readyMadeShoppingChoices: Array<ShopProduct> = [
     {
         name: "Eggs",
         uniqueCode: "0001",
@@ -32,4 +32,4 @@ const ReadyMadeShoppingItem: Array<ShopProduct> = [
     }
 ];
 
-export default ReadyMadeShoppingItem; 
+module.exports = readyMadeShoppingChoices;

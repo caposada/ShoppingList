@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+
+    "paths": {
+      "@/shared/*": ["./../shared/*"]
+    },
+
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    //"incremental": true,                              /* Enable incremental compilation */
+    "target": "es6",                                  
+    "module": "CommonJS",   
+    "outDir": "./dist/",
+    //"outFile": "./dist/index.js",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+
+  },  
+  "include": ["./**/*"],
+  "exclude":[
+    "./dist",
+    "./node_modules"
+  ]
+}
