@@ -5,7 +5,7 @@
   "main": "./bin/www",
   "scripts": {
     "start": "ts-node-dev server.js",
-    "debug": "ts-node-dev --inspect server.js",
+    "debug": "ts-node-dev --inspect -- server.js",
     "build": "tsc -p ."
   },
   "dependencies": {
@@ -17,7 +17,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "^0.29.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "taffy": "^2.6.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",

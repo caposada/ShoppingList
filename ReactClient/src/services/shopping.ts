@@ -11,13 +11,18 @@ function getReadyMadeShoppingItems() {
         });
 }
 
-// function getBasketItemsFromServer(userId: String) {
-//     return fetch('http://localhost:9000/shopping/usersBasketItems/' + userId)
-//         .then(data => data.json());
-// }
+function getBasketItemsFromServer(userId: String) {
+    return fetch('http://localhost:9000/shopping/usersBasketItems/' + userId)
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+            return new Array<BasketItem>(...data.list);
+        });
+}
 
 function postBasketItemsToServer(userId: String, list: Array<BasketItem>) {
-    return fetch('http://localhost:9000/shopping/usersBasketItems/:' + userId, {
+    return fetch('http://localhost:9000/shopping/usersBasketItems/' + userId, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -27,4 +32,8 @@ function postBasketItemsToServer(userId: String, list: Array<BasketItem>) {
         .then(data => data.json());
 }
 
-export { getReadyMadeShoppingItems, postBasketItemsToServer };
+export { 
+    getReadyMadeShoppingItems, 
+    getBasketItemsFromServer, 
+    postBasketItemsToServer 
+};

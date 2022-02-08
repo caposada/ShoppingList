@@ -1,5 +1,6 @@
 var express = require('express');
 var readyMadeShoppingChoices = require('../testing/data/readyMadeShoppingChoices.ts');
+var { getUsersBasketItems, postUsersBasketItems } = require('../Utils/Database');
 
 var router = express.Router();
 
@@ -22,11 +23,11 @@ router.get('/readyMadeShoppingChoices', function(req, res, next) {
 
 router.get('/usersBasketItems/:id', function(req, res, next) {
     const id = req.params.id;
+    const basketItems = getUsersBasketItems(id);
     const status = 'OK';
-    const list = [ ];
     const data = JSON.stringify({ 
         status: status, 
-        list: list
+        list: basketItems
     });
     res.send(data);
 });
@@ -38,6 +39,7 @@ router.post('/usersBasketItems/:id', function(req, res, next) {
     const data = JSON.stringify({ 
         status: status
     });
+    postUsersBasketItems(id, list);
     res.send(data);
 });
 

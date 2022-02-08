@@ -1,11 +1,11 @@
 import React from "react";
 import 'fomantic-ui-css/semantic.css';
-import ShoppingListComponent from "../components/ShoppingListComponent";
+import ShoppingComponent from "../components/ShoppingComponent";
 
 const App = () => {
   return (
     <div className="App">
-      <ShoppingListComponent />
+      <ShoppingComponent />
     </div>
   );  
 }

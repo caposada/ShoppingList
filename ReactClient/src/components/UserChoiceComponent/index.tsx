@@ -1,31 +1,29 @@
 import React from "react";
-import BasketItem from "@/shared/BasketItem";
+import ShopProduct from "@/shared/ShopProduct";
 
-const UserItemComponent = ({ addToShoppingItem }) => {
+const UserChoiceComponent = (props: { itemSubmitted: any }) => {
     const [value, setValue] = React.useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const name = value.trim();
         setValue("");
         if (name !== "") {
-            const shoppingItem: BasketItem = {
+            const shoppingItem: ShopProduct = {
                 name: name,
-                uniqueCode: "0",
-                count: 1
+                uniqueCode: "0000_" + name
             };
-            addToShoppingItem(shoppingItem);
+            props.itemSubmitted(shoppingItem);
         }
     };
 
     return (         
-        <form>
+        <form onSubmit={handleSubmit}>
             <div 
             className="ui left action input">
                 <button 
                 className="ui primary icon button" 
-                type="button" 
-                value="button"    
-                onClick={() => handleSubmit()}
+                type="submit"
                 data-tooltip="Add your own choice"
                 data-position="bottom left"
                 data-variation="tiny">
@@ -40,4 +38,4 @@ const UserItemComponent = ({ addToShoppingItem }) => {
     );  
 }
 
-export default UserItemComponent;
+export default UserChoiceComponent;

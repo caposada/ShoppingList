@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ShopProduct from "@/shared/ShopProduct";
 import { getReadyMadeShoppingItems } from "../../services/shopping";
 
-const ReadyMadeChoicesComponent = ({ addToShoppingItem }) => {
+const ReadyMadeChoicesComponent = (props: { addReadyMadeItem: any }) => {
     const empty = new Array<ShopProduct>();
     const [readyMadeShoppingChoices, setReadyMadeShoppingChoices] = useState(empty);
     
@@ -14,8 +14,8 @@ const ReadyMadeChoicesComponent = ({ addToShoppingItem }) => {
             });
     }, []);
 
-    const addReadyMadeItem = (shoppingItem: ShopProduct) => {
-        addToShoppingItem(shoppingItem);
+    const readyMadeItemClicked = (shoppingItem: ShopProduct) => {
+        props.addReadyMadeItem(shoppingItem);
     };
 
     return (         
@@ -28,7 +28,7 @@ const ReadyMadeChoicesComponent = ({ addToShoppingItem }) => {
                         type="button"  
                         value="button" 
                         name={readyMadeShoppingChoice.name}  
-                        onClick={() => addReadyMadeItem(readyMadeShoppingChoice)}
+                        onClick={() => readyMadeItemClicked(readyMadeShoppingChoice)}
                         data-tooltip={readyMadeShoppingChoice.info}
                         data-position="right center"
                         data-variation="tiny">

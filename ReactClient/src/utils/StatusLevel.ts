@@ -6,7 +6,7 @@ export enum StatusLevel {
     Critical = "red"
 };
 
-export function GetColor(count) {
+export function GetColor(count: number) {
     var color = "primary";
     switch (true) {
         case (count <= 2): 
