@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Header } from 'semantic-ui-react';
+import { toast } from 'react-toastify';
 import BasketItemComponent from "../BasketItemComponent";
 import { getBasketItemsFromServer, postBasketItemsToServer } from "../../services/shopping";
 import BasketItem from "@/shared/BasketItem";
@@ -38,7 +39,10 @@ const BasketComponent = () => {
         // Send basketItems to API
         postBasketItemsToServer(userId, basketItems)
             .then(data => {
-                const dummy = 0;
+                toast.success("Basket items have been process.");
+            })
+            .catch(data => {
+                toast.warn("Failed to process basket.");
             });
     };
 
