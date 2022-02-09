@@ -24,7 +24,7 @@ const BasketComponent = () => {
             .then(( basketItems: Array<BasketItem> ) => {
                 dispatch(setBasketItems(basketItems));  
             });
-    }, []);
+    }, [ dispatch ]); 
 
     const removeItemFromBasket = ( basketItem: BasketItem) => {        
         let foundBasketItem = basketItems.find(
