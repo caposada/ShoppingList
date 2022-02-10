@@ -15,6 +15,18 @@
             ],
             "type": "pwa-node"
         },
+
+        
+        {
+            "name": "Launch ReactClient Test",
+            "command": "npm run test",
+            "request": "launch",
+            "type": "node-terminal",
+            "webRoot": "${workspaceFolder}/ReactClient",
+            "cwd": "${workspaceFolder}/ReactClient"
+        },
+
+
         {
             "name": "Launch Api (Node/Express server)",
             "command": "npm start",

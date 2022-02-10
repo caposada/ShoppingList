@@ -1,2 +1,3 @@
 {
+    "jestdebugger.jestCommand": "npm run test --"
 }

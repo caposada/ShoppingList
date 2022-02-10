@@ -31,12 +31,15 @@ const BasketComponent = () => {
             (x:BasketItem) => x.uniqueCode === basketItem.uniqueCode);
         if (foundBasketItem !== undefined) {
             const index = basketItems.indexOf(foundBasketItem);  
-            dispatch(removeBasketItem(index));  
+            dispatch(removeBasketItem({ 
+                index: index
+            }));  
         }
     };
 
     const checkout = () => {
         // Send basketItems to API
+        // TODO mutation - 'get' new data from server after 'post'
         postBasketItemsToServer(userId, basketItems)
             .then(data => {
                 toast.success("Basket items have been process.");

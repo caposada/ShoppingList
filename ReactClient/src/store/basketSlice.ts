@@ -3,25 +3,24 @@ import { insertItem, removeItem, updateItem } from "./utils";
 import BasketItem from "@/shared/BasketItem";
 
 const initialBasketItems: Array<BasketItem> = [];
+const initialState = {
+  basketItems: initialBasketItems,
+  count: initialBasketItems.length
+};
 
 export const slice = createSlice({
     name: 'basket',
-    initialState: {
-        basketItems: initialBasketItems,
-        count: initialBasketItems.length
-    },
+    initialState,
     reducers: {
         setBasketItems: (state, action) => {
           state.basketItems = action.payload;
           state.count = action.payload.length;
         },
         addBasketItems: (state, action) => {
-          const newBasketItem = action.payload as BasketItem;
-          newBasketItem.count = 1;
           state.basketItems = insertItem(
             state.basketItems, 
             {
-              item: newBasketItem,
+              item: action.payload.basketItem as BasketItem,
               index: 0
             }
           );
@@ -31,7 +30,7 @@ export const slice = createSlice({
           state.basketItems = removeItem(
             state.basketItems, 
             {
-              index: action.payload
+              index: action.payload.index
             }
           );
           state.count = state.basketItems.length;
@@ -44,7 +43,8 @@ export const slice = createSlice({
               index: action.payload.index
             }
           );
-        }
+        },
+        clearBasketItem:  (state, action) => initialState
     }
 });
 
@@ -52,7 +52,8 @@ export const {
   setBasketItems, 
   addBasketItems, 
   removeBasketItem,
-  updateBasketItem 
+  updateBasketItem,
+  clearBasketItem 
 } = slice.actions;
 
 // The function below is called a selector and allows us to select a value from

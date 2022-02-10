@@ -22,7 +22,9 @@ const ShoppingComponent = () => {
             // Doesn't exists  
             let newBasketItem: BasketItem = { ...shopProduct } as BasketItem;   
             newBasketItem.count = 1;
-            dispatch(addBasketItems(newBasketItem));      
+            dispatch(addBasketItems({ 
+                basketItem: newBasketItem
+            }));      
         } else {
             // Does exists
             if (foundBasketItem.limit == null || foundBasketItem.count < foundBasketItem.limit) {
