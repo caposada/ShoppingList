@@ -55,9 +55,7 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/.*",
-      ".*\\.js"
-    ],
-    "maxWorkers": 4
+      "node_modules/.*"
+    ]
   }
 }
